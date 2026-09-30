@@ -10,3 +10,7 @@ dist
 .pytest_cache
 .tox
 .coverage*
+.venv/
+演示结果/
+*.repro-*/
+证据/

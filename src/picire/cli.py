@@ -35,7 +35,11 @@ from .splitter import SplitterRegistry
 from .subprocess_test import ConcatTestBuilder, SubprocessTest
 
 logger = logging.getLogger('picire')
-__version__ = metadata.version(__package__)
+# PANDAO derivative: the bundled engine keeps its original module name.
+try:
+    __version__ = metadata.version('pandao-reprokit')
+except metadata.PackageNotFoundError:
+    __version__ = metadata.version(__package__)
 
 
 def create_parser():

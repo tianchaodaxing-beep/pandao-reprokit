@@ -1,4 +1,5 @@
 Copyright (c) 2016-2026 Renata Hodovan, Akos Kiss.
+Copyright (c) 2026 PANDAO (new modules and derivative modifications).
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
