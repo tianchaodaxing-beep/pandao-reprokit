@@ -10,6 +10,7 @@ import time
 
 from picire import DD, Outcome, ReductionError, ReductionStopped
 
+from . import __version__
 from .adapter import Adapter, TaskError
 from .process import run_command
 
@@ -137,7 +138,7 @@ def _report(settings, probe, adapter, original, *, status, reason, minimal, veri
     source_unchanged = settings.source.is_file() and digest(settings.source.read_bytes()) == digest(original)
     if not source_unchanged:
         status, reason, verified, minimal = "source_changed", "原文件在运行期间发生变化，请检查后重新运行", False, False
-    report = {"version": "0.1.0", "status": status, "reason": reason,
+    report = {"version": __version__, "status": status, "reason": reason,
               "format": settings.kind, "json_pointer": settings.pointer,
               "input_units": len(adapter.units), "output_units": len(kept),
               "kept_positions": [i + 1 for i in kept], "executions": probe.count,
