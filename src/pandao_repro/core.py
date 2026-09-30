@@ -3,6 +3,7 @@ from dataclasses import dataclass, field
 import datetime
 import hashlib
 import json
+from .i18n import write_summary
 import math
 from pathlib import Path
 import sys
@@ -148,6 +149,7 @@ def _report(settings, probe, adapter, original, *, status, reason, minimal, veri
               "seconds": round(time.monotonic() - probe.started, 3),
               "created_at": datetime.datetime.now().astimezone().isoformat()}
     (settings.out / "结论.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_summary(settings.out, report)
     titles = {"completed": "缩减完成", "limited": "达到限制，已保存当前样本", "unstable": "错误不能稳定复现",
               "unverified": "独立复现核对未通过", "source_changed": "原文件发生变化"}
     lines = ["# " + titles.get(status, status), "", reason, "",

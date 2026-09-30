@@ -12,3 +12,9 @@ PANDAO 修改内容：新增 `pandao_repro` 模块、中文使用说明、结构
 原版核心缩减算法未改写，不能将其归为 PANDAO 原创算法。PANDAO 新增部分也按 BSD-3-Clause 发布。原作者及贡献者不为本衍生项目背书。
 
 运行依赖包括 chardet 与 inators，安装时通过其各自的发行包取得。它们的许可证以安装包内原文为准，未把依赖源码重新包装成本项目原创内容。
+
+## English
+
+Built on Picire: https://github.com/renatahodovan/picire, baseline commit `1e5b25c5aee2bee62f3e0192d591050219eaec22`. Original authors include Renata Hodovan and Akos Kiss; some files also credit Daniel Vince and other contributors. The original BSD-3-Clause license and copyright notices remain in `LICENSE.rst`.
+
+PANDAO added structured reconstruction, command predicates, stability checks, reports, demos and documentation in `pandao_repro`. Picire core algorithms remain upstream code; PANDAO additions are also BSD-3-Clause. No endorsement by original authors is implied. Runtime dependencies chardet and inators retain the licenses supplied with their distributions.

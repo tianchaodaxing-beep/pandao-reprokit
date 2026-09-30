@@ -1,5 +1,6 @@
 """中文命令入口；命令参数以独立列表传入，不经过 shell。"""
 import argparse
+from .i18n import Parser, configure, t, write_summary
 import datetime
 import hashlib
 import json
@@ -48,10 +49,12 @@ def verify(path):
 
 
 def main(argv=None):
+    argv = configure(argv)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
         sys.stderr.reconfigure(encoding="utf-8")
-    parser = argparse.ArgumentParser(description="将出错文件缩减为仍能复现同一错误的小样本")
+    parser = Parser(description="将出错文件缩减为仍能复现同一错误的小样本")
+    parser.add_argument("--lang", choices=["zh", "en"], default="zh", help="Display language: zh or en")
     subs = parser.add_subparsers(dest="action", required=True)
     run = subs.add_parser("reduce", help="缩减出错输入")
     run.add_argument("--input", required=True, type=Path, help="原输入文件")
@@ -81,7 +84,7 @@ def main(argv=None):
             from .demo import make_demo
             output = args.out or Path.cwd() / "演示结果" / datetime.datetime.now().strftime("%Y%m%d-%H%M%S-%f")
             source = make_demo(output)
-            print("正在运行模拟故障示例；不代表真实业务数据。", flush=True)
+            print(t("正在运行模拟故障示例；不代表真实业务数据。"), flush=True)
             report = reduce_file(Settings(source=source, out=output / "缩减结果", kind="csv",
                                           match="E_RULE_COLLISION", command=["{python}", "-m", "pandao_repro.demo", "{input}"]))
             destination = output / "缩减结果"
@@ -93,13 +96,13 @@ def main(argv=None):
                                           expected_exit=args.exit_code, timeout=args.timeout, seconds=args.seconds,
                                           max_tests=args.max_tests, confirm=args.confirm))
             destination = args.out
-        print(f"保留 {report['output_units']} / {report['input_units']} 项；执行 {report['executions']} 次。")
-        print("最终样本独立复现：" + ("三次通过" if report["independent_verified"] else "未通过"))
-        print("逐项删除核对：" + ("通过" if report["one_minimal"] else "未完成"))
-        print("结果目录：" + str(destination.resolve()))
+        print(t(f"保留 {report['output_units']} / {report['input_units']} 项；执行 {report['executions']} 次。"))
+        print(t("最终样本独立复现：" + ("三次通过" if report["independent_verified"] else "未通过")))
+        print(t("逐项删除核对：" + ("通过" if report["one_minimal"] else "未完成")))
+        print(t("结果目录：" + str(destination.resolve())))
         return 0 if report["status"] == "completed" and report["one_minimal"] else (3 if report["independent_verified"] else 4)
     except (TaskError, BudgetExceeded, OSError, json.JSONDecodeError) as error:
-        print("无法完成：" + str(error), file=sys.stderr)
+        print(t("无法完成：" + str(error)), file=sys.stderr)
         return 2
 
 

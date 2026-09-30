@@ -1,5 +1,7 @@
 # PANDAO 故障缩减工具
 
+简体中文 · [English](README.en.md)
+
 基于 [Picire](https://github.com/renatahodovan/picire) 二次开发。将一份出错输入逐步缩成仍能复现同一个错误的小样本，供开发人员和软件服务商排查。
 
 适用于有本机命令入口、能够稳定复现的导入或文本处理错误。首版支持文本行、保留表头的 CSV，以及 JSON 中指定数组内的记录。
