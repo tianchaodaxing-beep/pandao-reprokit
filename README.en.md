@@ -92,3 +92,7 @@ Defaults: 10 seconds per command, 300 seconds overall and 300 executions. Adjust
 | 4 | Independent reproduction is incomplete or failed |
 
 See `LICENSE.rst` and `THIRD_PARTY_NOTICES.md`. Picire's original English documentation is retained in `README.rst`.
+
+## Contact
+
+Project enquiries and collaboration: [tianchaodaxing@gmail.com](mailto:tianchaodaxing@gmail.com)

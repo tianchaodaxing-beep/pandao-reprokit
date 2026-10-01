@@ -88,3 +88,7 @@ python 复现.py
 默认每次命令最多运行 10 秒，整个任务最多 300 秒、300 次执行。可用 `--timeout`、`--seconds`、`--max-tests` 调整。退出码 0 表示完成且核对通过；2 表示输入或执行条件错误；3 表示已有通过独立复现的样本，但缩减或最小性核对未完成；4 表示独立复现核对未完成或未通过。
 
 许可证及原始来源见 `LICENSE.rst` 和 `THIRD_PARTY_NOTICES.md`。原版说明保留在 `README.rst`。
+
+## Contact
+
+Project enquiries and collaboration: [tianchaodaxing@gmail.com](mailto:tianchaodaxing@gmail.com)
